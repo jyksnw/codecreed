@@ -1,0 +1,13 @@
+name = "Code Creed Theme"
+license = "MIT"
+licenselink = "https://github.com/jyksnw/code-creed-creations/blob/master/LICENSE"
+description = ""
+homepage = "http://example.com/"
+tags = []
+features = []
+min_version = "0.41.0"
+
+[author]
+  name = "Jason Snow"
+  homepage = ""
+

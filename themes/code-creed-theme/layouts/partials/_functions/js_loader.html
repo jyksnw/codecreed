@@ -1,0 +1,14 @@
+{{ $resource := resources.Get .src }}
+{{- $attrs := .attrs }}
+{{ if $resource }}
+  {{ if not hugo.IsProduction | or (eq site.Params.env "development") | or (eq hugo.Environment "development") }}
+    {{ with $resource | js.Build }}
+      <script src="{{ .RelPermalink }}" {{ $attrs }}></script>
+    {{ end }}
+  {{ else }}
+    {{ $opts := dict "minify" true }}
+    {{ with $resource | js.Build $opts | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" {{ $attrs }}></script>
+    {{ end }}
+  {{ end }}
+{{ end }}

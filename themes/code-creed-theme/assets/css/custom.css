@@ -1,0 +1,76 @@
+:root {
+  --bg: #ffffff;
+  --accent-bg: #f0f8ff;
+  --text: #1e3a8a;
+  --text-light: #4a555a;
+  --border: #718096;
+  --accent: #e53e3e;
+  --accent-hover: #fc8181;
+  --accent-text: #ffffff;
+  --code: #c62828;
+  --preformatted: #374151;
+  --marked: #ffd700;
+  --disabled: #a0aec0;
+}
+
+.logo {
+    padding-bottom: 1em;
+}
+
+.logo h1 {
+  font-size: 2.5em;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.logo .code {
+  color: var(--accent);
+}
+
+.logo .ampersand {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: var(--border);
+  vertical-align: middle;
+}
+
+.logo .creed {
+  color: var(--text);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #1a202c;
+      --accent-bg: #2d3748;
+      --text: #e2e8f0;
+      --text-light: #a0aec0;
+      --border: #6b7280;
+      --accent: #f98125;
+      --accent-hover: #ffb347;
+      --accent-text: #1a202c;
+      --code: #ff6b6b;
+      --preformatted: #d1d5db;
+      --disabled: #4a5568;
+    }
+  
+    .logo h1 {
+      color: var(--text);
+    }
+  
+    .logo .code {
+      color: var(--accent);
+    }
+  
+    .logo .ampersand {
+      color: var(--border);
+    }
+  
+    .logo .creed {
+      color: var(--text);
+    }
+  }

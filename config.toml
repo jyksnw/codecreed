@@ -1,0 +1,27 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Code & Creed Creations'
+author = 'Jason Snow'
+theme = 'code-creed-theme'
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    pre = "Go Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Blog"
+    pre = "Read Latest Posts"
+    url = "/blog/"
+    weight = 2
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 3
+
+[assets]
+  minify = true
+  fingerprint = true
+  [assets.postcss]
+    config = "themes/code-creed-theme/postcss.config.mjs"
