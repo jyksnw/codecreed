@@ -1,8 +1,13 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://codeandcreed.com/'
 languageCode = 'en-us'
-title = 'Code & Creed Creations'
+title = 'Code & Creed'
 author = 'Jason Snow'
 theme = 'code-creed-theme'
+
+[params]
+    description = 'A website project dedicated to bridging the digital and tangible worlds through thoughtful content and design.'
+    author = 'Jason Snow'
+    title = 'Code & Creed'
 
 [menu]
   [[menu.main]]

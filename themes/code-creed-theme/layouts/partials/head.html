@@ -2,7 +2,6 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; script-src 'self' https://scripts.simpleanalyticscdn.com; style-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
@@ -35,3 +34,6 @@
 {{ with .OutputFormats.Get "rss" }}
 <link href="{{ .Permalink }}" rel="alternate" type="{{ .MediaType }}" title="{{ $.Site.Title }}" />
 {{ end }}
+
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/schema.html" . }}

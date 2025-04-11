@@ -1,18 +1,22 @@
 {{ with resources.Get "css/simple.css" }}
     {{ if hugo.IsProduction }}
         {{ with . | postCSS | fingerprint }}
+            <link rel="preload" href="{{ .RelPermalink }}" as="style">
             <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
         {{ end }}
     {{ else }}
+        <link rel="preload" href="{{ .RelPermalink }}" as="style">
         <link rel="stylesheet" href="{{ .RelPermalink }}">
     {{ end }}
 {{ end}}
 {{ with resources.Get "css/custom.css" }}
     {{ if hugo.IsProduction }}
         {{ with . | postCSS | fingerprint }}
+            <link rel="preload" href="{{ .RelPermalink }}" as="style">
             <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
         {{ end }}
     {{ else }}
+        <link rel="preload" href="{{ .RelPermalink }}" as="style">
         <link rel="stylesheet" href="{{ .RelPermalink }}">
     {{ end }}
 {{ end}}

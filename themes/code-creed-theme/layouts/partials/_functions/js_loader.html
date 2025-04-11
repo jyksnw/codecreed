@@ -1,14 +1,24 @@
 {{ $resource := resources.Get .src }}
-{{- $attrs := .attrs }}
+{{- $async := .async }}
+{{- $preload := .preload }}
 {{ if $resource }}
-  {{ if not hugo.IsProduction | or (eq site.Params.env "development") | or (eq hugo.Environment "development") }}
-    {{ with $resource | js.Build }}
-      <script src="{{ .RelPermalink }}" {{ $attrs }}></script>
+  {{ $fileContentLength := len $resource.Content }}
+  {{ if gt $fileContentLength 0 }}
+    {{ if not hugo.IsProduction | or (eq site.Params.env "development") | or (eq hugo.Environment "development") }}
+      {{ with $resource | js.Build }}
+        {{ if $preload }}
+          <link rel="preload" href="{{ .RelPermalink }}" as="script">
+        {{ end }}
+        <script src="{{ .RelPermalink }}" {{ if $async }}async{{ end }}></script>
+      {{ end }}
+    {{ else }}
+      {{ $opts := dict "minify" true }}
+      {{ with $resource | js.Build $opts | fingerprint }}
+        {{ if $preload }}
+          <link rel="preload" href="{{ .RelPermalink }}" as="script">
+        {{ end }}
+        <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" {{ if $async }}async{{ end }}></script>
+      {{ end }}
     {{ end }}
-  {{ else }}
-    {{ $opts := dict "minify" true }}
-    {{ with $resource | js.Build $opts | fingerprint }}
-      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" {{ $attrs }}></script>
-    {{ end }}
-  {{ end }}
+  {{ end}}
 {{ end }}

@@ -1,5 +1,6 @@
 {{- $page := .page }}
 {{- $menuID := .menuID }}
+{{- $isMain := eq $menuID "main" | default false }}
 
 {{- with index site.Menus $menuID }}
     <ul>

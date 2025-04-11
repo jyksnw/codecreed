@@ -14,7 +14,7 @@
 }
 
 .logo {
-    padding-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 .logo h1 {
@@ -43,34 +43,34 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-      color-scheme: dark;
-      --bg: #1a202c;
-      --accent-bg: #2d3748;
-      --text: #e2e8f0;
-      --text-light: #a0aec0;
-      --border: #6b7280;
-      --accent: #f98125;
-      --accent-hover: #ffb347;
-      --accent-text: #1a202c;
-      --code: #ff6b6b;
-      --preformatted: #d1d5db;
-      --disabled: #4a5568;
-    }
-  
-    .logo h1 {
-      color: var(--text);
-    }
-  
-    .logo .code {
-      color: var(--accent);
-    }
-  
-    .logo .ampersand {
-      color: var(--border);
-    }
-  
-    .logo .creed {
-      color: var(--text);
-    }
+  :root {
+    color-scheme: dark;
+    --bg: #1a202c;
+    --accent-bg: #2d3748;
+    --text: #e2e8f0;
+    --text-light: #a0aec0;
+    --border: #6b7280;
+    --accent: #f98125;
+    --accent-hover: #ffb347;
+    --accent-text: #1a202c;
+    --code: #ff6b6b;
+    --preformatted: #d1d5db;
+    --disabled: #4a5568;
   }
+
+  .logo h1 {
+    color: var(--text);
+  }
+
+  .logo .code {
+    color: var(--accent);
+  }
+
+  .logo .ampersand {
+    color: var(--border);
+  }
+
+  .logo .creed {
+    color: var(--text);
+  }
+}
