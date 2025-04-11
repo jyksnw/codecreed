@@ -1,14 +1,4 @@
-{{ with resources.Get "js/main.js" }}
-  {{ if eq hugo.Environment "development" }}
-    {{ with . | js.Build }}
-      <script src="{{ .RelPermalink }}"></script>
-    {{ end }}
-  {{ else }}
-    {{ $opts := dict "minify" true }}
-    {{ with . | js.Build $opts | fingerprint }}
-      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-    {{ end }}
-  {{ end }}
-{{ end }}
+{{ partial "_functions/js_loader.html" (dict "src" "js/body/sync.js" "attrs" "") }}
+{{ partial "_functions/js_loader.html" (dict "src" "js/body/async.js" "attrs" "async") }}
 
 <script async  data-hostname="codeandcreed.com" src="https://scripts.simpleanalyticscdn.com/latest.js" defer></script>
