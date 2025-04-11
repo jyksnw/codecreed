@@ -1,10 +1,7 @@
 <meta charset="utf-8">
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; script-src 'self' https://scripts.simpleanalyticscdn.com https://cloudflareinsights.com https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
@@ -27,7 +24,7 @@
 <meta name="author" content="{{ (partial "author.html" . ) }}">
 <link rel="canonical" href="{{ if .Params.canonicalURL -}} {{ trim .Params.canonicalURL " " }} {{- else -}} {{ .Permalink }} {{- end }}">
 
-<meta name="color-scheme" content="light dark" type="text/css" >
+<meta name="color-scheme" content="light dark">
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}
 
