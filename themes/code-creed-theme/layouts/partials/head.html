@@ -72,9 +72,11 @@
 {{- else }}
   {{ with .Params.keywords }}
     <meta name="keywords" content="{{ delimit . ", " }}">
-  {{ else with .Params.tags }}
-    {{ $topTags := first 5 . }}
-    <meta name="keywords" content="{{ delimit $topTags ", " }}">
+  {{ else }}
+    {{ with .Params.tags }}
+      {{ $topTags := first 5 . }}
+      <meta name="keywords" content="{{ delimit $topTags ", " }}">
+    {{ end }}
   {{ end }}
 {{- end }}
 
