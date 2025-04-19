@@ -1,6 +1,4 @@
-<nav>
-    <ul>
-        <li>{{ partial "header/logo.html" . }}</li>
-    </ul>
+<nav role="navigation">
+    {{ partial "header/logo.html" . }}
     {{ partial "header/menu.html" (dict "menuID" "main" "page" .) }}
 </nav>

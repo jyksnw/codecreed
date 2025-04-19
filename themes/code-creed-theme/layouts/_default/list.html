@@ -1,0 +1,59 @@
+{{ define "main" }}
+<main>
+  {{ if .Data.Singular }}
+  <section aria-labelledby="filter-heading">
+    <h2 id="filter-heading">Filtering for "{{ .Title }}"</h2>
+    <p>
+      {{ partial "_functions/render-link.html" (dict
+        "Destination" (relURL "blog")
+        "Text" "Remove filter"
+      ) }}
+    </p>
+  </section>
+  {{ end }}
+
+  {{ if or .Paginator.HasPrev .Paginator.HasNext }}
+  <nav aria-label="Pagination">
+    {{ partial "pagination.html" . }}
+  </nav>
+  {{ end }}
+
+  <ul class="blog-posts">
+    {{ range .Paginator.Pages }}
+    <li>
+      <span>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format (default "2006-01-02" .Site.Params.dateFormat) }}
+        </time>
+      </span>
+      {{ if .Params.link }}
+      {{ partial "_functions/render-link.html" (dict
+        "Destination" .Params.link
+        "Text" .Title
+      ) }}
+      {{ else }}
+      {{ partial "_functions/render-link.html" (dict
+        "Destination" .RelPermalink
+        "Text" .Title
+      ) }}
+      {{ end }}
+    </li>
+    {{ else }}
+    <li>No posts yet</li>
+    {{ end }}
+  </ul>
+
+  {{ if not .Data.Singular }}
+  <aside aria-label="Tags">
+    <p>
+      {{ range .Site.Taxonomies.tags }}
+      {{ partial "_functions/render-link.html" (dict
+        "Destination" .Page.RelPermalink
+        "Text" (printf "#%s" .Page.LinkTitle)
+      ) }}&nbsp;
+      {{ end }}
+    </p>
+  </aside>
+  {{ end }}
+</main>
+{{ end }}

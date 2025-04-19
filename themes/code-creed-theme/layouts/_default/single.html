@@ -1,0 +1,70 @@
+{{ define "main" }}
+<article>
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}
+    <p>{{ . }}</p>
+    {{ end }}
+    <section aria-label="Post details">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+      </time>
+      {{ with .Params.author }}
+      <span>by {{ . }}</span>
+      {{ end }}
+      {{ with .Params.readingTime }}
+      <span>{{ . }} min read</span>
+      {{ end }}
+      {{ with .Params.wordCount }}
+      <span>{{ . }} words</span>
+      {{ end }}
+      {{ with .GetTerms "tags" }}
+      <ul>
+        {{ range . }}
+        <li>
+          {{ partial "_functions/render-link.html" (dict
+            "Destination" .RelPermalink
+            "Text" (printf "#%s" .LinkTitle)
+            "Title" (printf "View all posts tagged with %s" .LinkTitle)
+          ) }}
+        </li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </section>
+  </header>
+
+  <section aria-label="Post content">
+    {{ if .Params.toc }}
+    <details>
+      <summary>Table of Contents</summary>
+      {{ .TableOfContents }}
+    </details>
+    {{ end }}
+    <main>
+      {{ .Content }}
+    </main>
+  </section>
+
+  <footer>
+    {{ if .Params.ShowPostNavLinks }}
+    <nav aria-label="Post navigation">
+      {{ with .PrevInSection }}
+      {{ partial "_functions/render-link.html" (dict
+        "Destination" .Permalink
+        "Text" (printf "&larr; Previous %s" .Title)
+        "Title" .Title
+      ) }}
+      {{ end }}
+      {{ with .NextInSection }}
+      {{ partial "_functions/render-link.html" (dict
+        "Destination" .Permalink
+        "Text" (printf "Next %s &rarr;" .Title)
+        "Title" .Title
+      ) }}
+      {{ end }}
+    </nav>
+    {{ end }}
+  </footer>
+</article>
+{{ end }}

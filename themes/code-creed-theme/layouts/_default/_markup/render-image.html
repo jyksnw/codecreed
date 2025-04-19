@@ -1,0 +1,48 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+{{- $alt := .Text -}}
+{{- $title := .Title -}}
+
+{{- if not $u.IsAbs -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path }}
+  {{- with or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
+    {{- $imageResource := . }}
+    {{- $src = $imageResource.RelPermalink -}}
+    {{- $srcset := "" -}}
+    {{- $sizes := "100vw" -}}
+
+    {{- if eq $imageResource.MediaType.SubType "svg" -}}
+      {{/* Don't process SVGs */}}
+    {{- else -}}
+      {{- $widths := slice 320 640 960 1200 1920 -}}
+      {{- $srcSetSources := slice -}}
+      {{- range $widths -}}
+        {{- $resized := $imageResource.Resize (printf "%dx" .) -}}
+        {{- $srcSetSources = $srcSetSources | append (printf "%s %dw" $resized.RelPermalink .) -}}
+      {{- end -}}
+      {{- $srcset = delimit $srcSetSources ", " -}}
+      {{- $sizes = "(max-width: 600px) 100vw, (max-width: 900px) 75vw, (max-width: 1200px) 60vw, 1200px" -}}
+    {{- end -}}
+
+    {{- with $u.RawQuery -}}
+      {{- $src = printf "%s?%s" $src . -}}
+      {{- if $srcset -}}{{- $srcset = printf "%s?%s" $srcset . -}}{{- end -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $src = printf "%s#%s" $src . -}}
+    {{- end -}}
+
+    {{- $attributes := dict "src" $src "alt" $alt "loading" "lazy" -}}
+    {{- if $title -}}{{- $attributes = merge $attributes (dict "title" ($title | transform.HTMLEscape)) -}}{{- end -}}
+    {{- if $srcset -}}{{- $attributes = merge $attributes (dict "srcset" $srcset "sizes" $sizes) -}}{{- end -}}
+
+    <img{{ range $k, $v := $attributes }}{{- if $v }} {{ $k }}="{{ $v }}"{{ end }}{{- end }}>
+
+  {{- else -}}
+    {{/* Fallback for external or missing images */}}
+    <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy"{{ with $title }} title="{{ $title | transform.HTMLEscape }}"{{ end }}>
+  {{- end -}}
+{{- else -}}
+  {{/* External Images */}}
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy"{{ with $title }} title="{{ $title | transform.HTMLEscape }}"{{ end }} crossorigin="anonymous">
+{{- end -}}

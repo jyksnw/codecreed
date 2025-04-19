@@ -13,7 +13,7 @@
       {{ end }}
     {{ else }}
       {{ $opts := dict "minify" true }}
-      {{ with $resource | js.Build $opts | fingerprint }}
+      {{ with $resource | js.Build $opts | minify | fingerprint }}
         {{ if $preload }}
           <link rel="preload" href="{{ .RelPermalink }}" as="script">
         {{ end }}

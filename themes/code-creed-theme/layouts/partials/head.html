@@ -1,36 +1,103 @@
 <meta charset="utf-8">
+
+{{/* Conditional IE Compatibility (if needed) */}}
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{{/* Security-related meta tags */}}
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; script-src 'self' https://scripts.simpleanalyticscdn.com https://cloudflareinsights.com https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-{{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
-<meta name="robots" content="index, follow">
-{{- else }}
-<meta name="robots" content="noindex, nofollow">
-{{- end }}
+{{/* Viewport for responsiveness */}}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>{{ if .IsHome }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ site.Title }}</title>
-{{- if .IsHome }}
-{{ with site.Params.keywords -}}<meta name="keywords" content="{{- range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}">{{ end }}
-{{- else }}
-<meta name="keywords" content="{{ if .Params.keywords -}}
-    {{- range $i, $e := .Params.keywords }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- else }}
-    {{- range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- end -}}">
-{{- end }}
-<meta name="description" content="{{- with .Description }}{{ . }}{{- else }}{{- if or .IsPage .IsSection}}
-    {{- .Summary | default (printf "%s - %s" .Title  site.Title) }}{{- else }}
-    {{- with site.Params.description }}{{ . }}{{- end }}{{- end }}{{- end -}}">
-<meta name="author" content="{{ (partial "author.html" . ) }}">
-<link rel="canonical" href="{{ if .Params.canonicalURL -}} {{ trim .Params.canonicalURL " " }} {{- else -}} {{ .Permalink }} {{- end }}">
-
-<meta name="color-scheme" content="light dark">
-{{ partialCached "head/css.html" . }}
-{{ partialCached "head/js.html" . }}
-
-{{ with .OutputFormats.Get "rss" }}
-<link href="{{ .Permalink }}" rel="alternate" type="{{ .MediaType }}" title="{{ $.Site.Title }}" />
+{{/* Robots meta tags */}}
+{{ if .Params.noindex }}
+  <meta name="robots" content="noindex">
+  <meta name="googlebot" content="noindex">
+{{ else }}
+  {{- if eq hugo.Environment "production" }}
+    <meta name="robots" content="index, follow">
+  {{- else }}
+    <meta name="robots" content="noindex, nofollow">
+  {{- end }}
 {{ end }}
 
+{{/* Title tag */}}
+<title>
+  {{- if .IsHome -}}
+    Home | {{ .Site.Title }}
+  {{- else if .Params.hide_site_title -}}
+    {{ .Page.Title }}
+  {{- else if .Page.Title -}}
+    {{ .Page.Title }} | {{ .Site.Title }}
+  {{- else -}}
+    {{ .Site.Title }}
+  {{- end -}}
+</title>
+<meta
+  name="title"
+  content="{{ with .Title -}}
+    {{ . }}
+  {{- else -}}
+    {{ .Site.Title }}
+  {{- end }}"
+/>
+
+{{/* Description meta tag */}}
+<meta
+  name="description"
+  content="{{ with .Description -}}
+    {{ . }}
+  {{- else -}}
+    {{ if .IsPage -}}
+      {{ .Summary }}
+    {{- else -}}
+      {{ with .Site.Params.description }}{{ . }}{{ end }}
+    {{- end }}
+  {{- end }}"
+/>
+
+{{/* Canonical link */}}
+{{- if isset .Params "canonical" -}}
+  <link rel="canonical" href="{{ .Params.canonical }}" />
+{{- else -}}
+  <link rel="canonical" href="{{ .Permalink }}" />
+{{- end }}
+
+{{/* Keywords meta tag */}}
+{{- if .IsHome }}
+  {{ with site.Params.keywords }}
+    <meta name="keywords" content="{{ delimit . ", " }}">
+  {{ end }}
+{{- else }}
+  {{ with .Params.keywords }}
+    <meta name="keywords" content="{{ delimit . ", " }}">
+  {{ else with .Params.tags }}
+    {{ $topTags := first 5 . }}
+    <meta name="keywords" content="{{ delimit $topTags ", " }}">
+  {{ end }}
+{{- end }}
+
+{{/* Author meta tag */}}
+<meta name="author" content="{{ (partial "head/author.html" . ) }}">
+
+{{/* Theme color */}}
+<meta name="color-scheme" content="light dark">
+
+{{/* CSS */}}
+{{ partialCached "head/css.html" . }}
+
+{{/* RSS Feed */}}
+{{ with .OutputFormats.Get "rss" }}
+  <link href="{{ .Permalink }}" rel="alternate" type="{{ .MediaType }}" title="{{ $.Site.Title }}" />
+{{ end }}
+
+{{/* JavaScript */}}
+{{ partialCached "head/js.html" . }}
+
+{{/* Social Media Meta Tags (Open Graph) */}}
 {{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+
+{{/* Structured Data (Schema.org) */}}
 {{ template "_internal/schema.html" . }}

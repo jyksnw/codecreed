@@ -25,8 +25,11 @@ theme = 'code-creed-theme'
     url = "/tags/"
     weight = 3
 
-[assets]
+[build]
   minify = true
-  fingerprint = true
-  [assets.postcss]
-    config = "themes/code-creed-theme/postcss.config.mjs"
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  useShortcuts = true

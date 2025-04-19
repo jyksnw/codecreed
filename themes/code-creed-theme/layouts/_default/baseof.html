@@ -2,13 +2,13 @@
 <html lang="{{ .Language.LanguageCode }}">
     {{- partial "head.html" . -}}
     <body>
-        <header class="container">
+        <header>
         {{- partial "header.html" . -}}
         </header>
-        <main class="container">
+        <main>
         {{- block "main" . }}{{- end }}
         </main>
-        <footer class="container">
+        <footer>
         {{- partial "footer.html" . -}}
         </footer>
 

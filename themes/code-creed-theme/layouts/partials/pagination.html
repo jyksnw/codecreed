@@ -1,0 +1,17 @@
+<div class="pagination">
+    {{ partial "_functions/render-link.html" (dict
+        "Destination" (cond .Paginator.HasPrev .Paginator.Prev.URL "#")
+        "Text" (printf "<span>&larr;</span><span>Newer posts</span>")
+        "Title" (cond .Paginator.HasPrev "Go to newer posts" "")
+        "Class" "pagination-newer"
+        "Attributes" (dict "style" (cond .Paginator.HasPrev "" "visibility: hidden;"))
+    ) }}
+    {{ if .Paginator.HasNext }}
+        {{ partial "_functions/render-link.html" (dict
+            "Destination" .Paginator.Next.URL
+            "Text" (printf "<span>Older posts</span><span>&rarr;</span>")
+            "Title" "Go to older posts"
+            "Class" "pagination-older"
+        ) }}
+    {{ end }}
+</div>

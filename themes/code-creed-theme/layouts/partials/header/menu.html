@@ -11,27 +11,17 @@
 {{- define "partials/inline/menu/walk.html" }}
   {{- $page := .page }}
   {{- range .menuEntries }}
-    {{- $attrs := dict "href" .URL }}
-    {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "aria-current" "page") }}
-    {{- else if $page.HasMenuCurrent .Menu .}}
-      {{- $attrs = merge $attrs (dict "aria-current" "true") }}
-    {{- end }}
-    {{- $name := .Name }}
-    {{- $hover := .Pre }}
+    {{- $link := .URL }}
+    {{- $linkTitle := .Title }}
+    {{- $linkText := .Name }}
     {{- with .Identifier }}
       {{- with T . }}
-        {{- $name = . }}
+        {{- $linkText = . }}
       {{- end }}
     {{- end }}
+    {{- $hover := .Pre }}
     <li>
-      <a class="contrast" aria-label="Link to {{ $name }}" {{if $hover }}title="{{ $hover }}"{{ end }}
-        {{- range $k, $v := $attrs }}
-          {{- with $v }}
-            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-          {{- end }}
-        {{- end -}}
-      >{{ $name }}</a>
+      {{ partial "_functions/render-link.html" (dict "Destination" $link "Text" $linkText "Title" $linkTitle) }}
       {{- with .Children }}
         <ul>
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}

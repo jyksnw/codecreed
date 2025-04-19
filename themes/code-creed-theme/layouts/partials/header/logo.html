@@ -1,7 +1,12 @@
-<div class="logo">
-  <h1>
-    <span class="code">Code</span>
-    <span class="ampersand">&amp;</span>
-    <span class="creed">Creed</span>
-  </h1>
-</div>
+{{- $logoURL := "/" -}}
+{{- $logoText := print "<span class=\"code\">Code</span><span class=\"ampersand\">&amp;</span><span class=\"creed\">Creed</span>" -}}
+
+<ul>
+  <li>
+    <div class="logo">
+      <h1>
+        {{ partial "_functions/render-link.html" (dict "Destination" $logoURL "Text" $logoText "Title" "Go to homepage") }}
+      </h1>
+    </div>
+  </li>
+</ul>

@@ -2,12 +2,19 @@ name = "Code Creed Theme"
 license = "MIT"
 licenselink = "https://github.com/jyksnw/code-creed-creations/blob/master/LICENSE"
 description = ""
-homepage = "http://example.com/"
+homepage = "http://codeandcreed.com/"
 tags = []
 features = []
-min_version = "0.41.0"
+min_version = "0.112.4"
 
 [author]
   name = "Jason Snow"
-  homepage = ""
+  homepage = "http://codeandcreed.com/"
+
+# If porting an existing theme
+[original]
+  name = "PaperMod"
+  author = "Aditya Telange"
+  homepage = "https://github.com/adityatelange/"
+  repo = "https://github.com/adityatelange/hugo-PaperMod/"
 
