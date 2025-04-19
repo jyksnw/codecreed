@@ -1,27 +1,28 @@
 {{ define "main" }}
 <article>
   <header>
-    <h1>{{ .Title }}</h1>
+    <h1 class="post-title">{{ .Title }}</h1>
     {{ with .Description }}
-    <p>{{ . }}</p>
+    <p class="post-description">{{ . }}</p>
     {{ end }}
-    <section aria-label="Post details">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
-      </time>
-      {{ with .Params.author }}
-      <span>by {{ . }}</span>
-      {{ end }}
-      {{ with .Params.readingTime }}
-      <span>{{ . }} min read</span>
-      {{ end }}
-      {{ with .Params.wordCount }}
-      <span>{{ . }} words</span>
-      {{ end }}
-      {{ with .GetTerms "tags" }}
-      <ul>
+    <div class="post-meta">
+      <p class="post-meta-secondary">
+        {{ with .ReadingTime }}<span class="reading-time">Estimated reading time: {{ . }} minutes</span>{{ end }}
+        {{ with .WordCount }}<span class="word-count"> ({{ . }} words)</span>{{ end }}
+      </p>
+      <p>
+        Published on 
+        <time datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+        </time>
+        {{ with .Params.author }}<span class="post-author">, written by {{ . }}</span>{{ end }}
+      </p>
+    </div>
+    {{ with .GetTerms "tags" }}
+    <nav aria-label="Tags">
+      <ul class="post-tags">
         {{ range . }}
-        <li>
+        <li class="post-tag-item">
           {{ partial "_functions/render-link.html" (dict
             "Destination" .RelPermalink
             "Text" (printf "#%s" .LinkTitle)
@@ -30,41 +31,38 @@
         </li>
         {{ end }}
       </ul>
-      {{ end }}
-    </section>
+    </nav>
+    {{ end }}
   </header>
 
-  <section aria-label="Post content">
-    {{ if .Params.toc }}
-    <details>
-      <summary>Table of Contents</summary>
-      {{ .TableOfContents }}
-    </details>
-    {{ end }}
-    <main>
-      {{ .Content }}
-    </main>
-  </section>
+  {{ if .Params.toc }}
+  <details>
+    <summary>Table of Contents</summary>
+    {{ .TableOfContents }}
+  </details>
+  {{ end }}
+  {{ .Content }}
 
   <footer>
     {{ if .Params.ShowPostNavLinks }}
     <nav aria-label="Post navigation">
       {{ with .PrevInSection }}
-      {{ partial "_functions/render-link.html" (dict
+      <span>Previous: </span>{{ partial "_functions/render-link.html" (dict
         "Destination" .Permalink
-        "Text" (printf "&larr; Previous %s" .Title)
-        "Title" .Title
+        "Text" .Title
+        "Title" (printf "Previous post in %s section: %s" .Section .Title)
       ) }}
       {{ end }}
       {{ with .NextInSection }}
-      {{ partial "_functions/render-link.html" (dict
+      <span>Next: </span>{{ partial "_functions/render-link.html" (dict
         "Destination" .Permalink
-        "Text" (printf "Next %s &rarr;" .Title)
-        "Title" .Title
+        "Text" .Title
+        "Title" (printf "Next post in %s section: %s" .Section .Title)
       ) }}
       {{ end }}
     </nav>
     {{ end }}
+    <p><a href="#top">[Top]</a></p>
   </footer>
 </article>
 {{ end }}

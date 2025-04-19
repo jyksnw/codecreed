@@ -1,0 +1,27 @@
+{{/*
+  shortcode: blockquote
+
+  Usage:
+  {{< blockquote cite="– Stephen King" citehref="https://en.wikipedia.org/wiki/Stephen_King" >}}
+    Friends don’t spy; true friendship is about privacy, too.
+  {{< /blockquote >}}
+
+  Parameters:
+  - cite: The source of the quotation (optional).
+  - citehref: Optional URL to link the cited source.
+*/}}
+{{ $cite := .Get "cite" }}
+{{ $citehref := .Get "citehref" }}
+<blockquote>
+    {{ .Inner }}
+    {{ with $cite }}
+    <p><cite>
+      {{ with $citehref }}
+        {{ $linkAttributes := dict "Destination" . "Text" ($cite | safeHTML) "Title" ($cite  | safeHTML) }}
+        {{ partial "_functions/render-link.html" $linkAttributes }}
+      {{ else }}
+        {{ . | safeHTML }}
+      {{ end }}
+    </cite></p>
+    {{ end }}
+</blockquote>

@@ -3,4 +3,4 @@
   {{ if strings.HasPrefix .Destination "http" }}
     target="_blank" rel="nofollow noopener noreferrer"
   {{ end }}
->{{ .Text | safeHTML }}{{ if strings.HasPrefix .Destination "http" }} <span aria-label="Opens in a new window"><small>🔗</small></span>{{ end }}</a>
+>{{ .Text | safeHTML }}{{ if strings.HasPrefix .Destination "http" }} <span aria-label="Opens in a new window"><small>↗</small></span>{{ end }}</a>

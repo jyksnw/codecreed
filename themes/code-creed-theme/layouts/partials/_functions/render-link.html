@@ -9,4 +9,4 @@
       {{ printf " %s=%q" $key $value | safeHTMLAttr }}
     {{ end }}
   {{ end }}
->{{ .Text | safeHTML }}{{ if strings.HasPrefix .Destination "http" }} <span aria-label="Opens in a new window">&#8618;</span>{{ end }}</a>
+>{{ .Text | safeHTML }}{{ if strings.HasPrefix .Destination "http" }} <span aria-label="Opens in a new window"><small>↗</small>{{ end }}</a>

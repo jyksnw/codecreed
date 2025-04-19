@@ -1,12 +1,9 @@
-{{- $logoURL := "/" -}}
-{{- $logoText := print "<span class=\"code\">Code</span><span class=\"ampersand\">&amp;</span><span class=\"creed\">Creed</span>" -}}
-
-<ul>
-  <li>
-    <div class="logo">
-      <h1>
-        {{ partial "_functions/render-link.html" (dict "Destination" $logoURL "Text" $logoText "Title" "Go to homepage") }}
-      </h1>
-    </div>
-  </li>
-</ul>
+<div class="logo">
+  <a href="/" aria-label="Code &amp; Creed Homepage" class="logo-link">
+    <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+      <text x="30" y="20" class="logo-bracket">{</text>
+      <text x="45" y="22" class="logo-ampersand">&amp;</text>
+      <text x="60" y="20" class="logo-bracket">}</text>
+    </svg>
+  </a>
+</div>

@@ -1,0 +1,23 @@
+<svg viewBox="21 1.15 48 48" xmlns="http://www.w3.org/2000/svg">
+    <style>
+    .logo-bracket {
+        font-family: sans-serif;
+        font-size: 30px;
+        fill: #2c636a;
+        dominant-baseline: central;
+        text-anchor: middle;
+    }
+    
+    .logo-ampersand {
+        font-family: sans-serif;
+        font-size: 25px;
+        font-weight: bold;
+        fill: #2c636a;
+        dominant-baseline: central;
+        text-anchor: middle;
+    }
+    </style>
+    <text x="30" y="20" class="logo-bracket">{</text>
+    <text x="45" y="22" class="logo-ampersand">&amp;</text>
+    <text x="60" y="20" class="logo-bracket">}</text>
+</svg>

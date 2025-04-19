@@ -1,0 +1,45 @@
+{{/*
+  shortcode: image
+
+  Usage:
+  {{< image src="/assets/images/your-image.jpg" alt="Your alt text" caption="Optional caption" class="optional-class" longdesc="Optional URL to a long description" isdecorative="true|false" longdesctext="Optional text for the long description link" >}}
+
+  Example with caption:
+  {{< image src="/assets/images/goose.jpg" alt="This is a black swan" caption="This is a black swan" longdesctext="View a detailed description of this swan" >}}
+
+  Example of a decorative image:
+  {{< image src="/assets/images/pattern.png" alt="" isdecorative="true" >}}
+
+  Example with long description:
+  {{< image src="/assets/images/complex-chart.png" alt="Bar chart showing website traffic over the last year" longdesc="/long-description/traffic-chart.html" >}}
+
+  Parameters:
+  - src: Path to the image file (required).
+  - alt: Alt text for the image (required for accessibility). Leave empty if the image is decorative and `isdecorative="true"`.
+  - caption: Optional text to display as a caption below the image.
+  - longdesc: Optional URL to a page containing a long description of the image content. Use this for complex images like charts or diagrams.
+  - isdecorative: Optional boolean (true/false) indicating if the image is purely decorative. If true, the `alt` attribute will be empty, and `role="presentation"` will be added for better screen reader handling. Defaults to `false`.
+  - longdesctext: Optional text to use within the long description link. Defaults to "(Long description)" or "Long description of the image".
+*/}}
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" }}
+{{ $caption := .Get "caption" }}
+{{ $longdesc := .Get "longdesc" }}
+{{ $isdecorative := .Get "isdecorative" | default "false" }}
+{{ $longdesctext := .Get "longdesctext" }}
+
+{{ $longDescID := printf "longdesc-%s" (replace $src "/" "-") }}
+
+{{ if eq $isdecorative "true" }}
+<img src="{{ $src }}" alt="" role="presentation" />
+{{ else }}
+  {{ if $caption }}
+  <figure>
+    <img src="{{ $src }}" alt="{{ $alt }}"{{ with $longdesc }} aria-describedby="{{ $longDescID }}"{{ end }} />
+    <figcaption>{{ $caption }}{{ with $longdesc }} <a id="{{ $longDescID }}" href="{{ $longdesc | safeURL }}" title="{{ with $longdesctext }}{{ . | safeHTML }}{{ else }}(Long description){{ end }}" aria-label="{{ with $longdesctext }}{{ . | plainify }}{{ else }}Long description of the image{{ end }}">{{ with $longdesctext }}{{ . | safeHTML }}{{ else }}(Long description){{ end }}{{ if strings.HasPrefix $longdesc "http" }} <span aria-label="Opens in a new window"><small>↗</small></span>{{ end }}</a>{{ end }}</figcaption>
+  </figure>
+  {{ else }}
+  <img src="{{ $src }}" alt="{{ $alt }}"{{ with $longdesc }} aria-describedby="{{ $longDescID }}"{{ end }} />
+  {{ with $longdesc }}<div class="sr-only"><a id="{{ $longDescID }}" href="{{ $longdesc | safeURL }}" title="{{ with $longdesctext }}{{ . | safeHTML }}{{ else }}Long description of the image{{ end }}" aria-label="{{ with $longdesctext }}{{ . | plainify }}{{ else }}Long description of the image{{ end }}">{{ with $longdesctext }}{{ . | safeHTML }}{{ else }}Long description of the image{{ end }}{{ if strings.HasPrefix $longdesc "http" }} <span aria-label="Opens in a new window"><small>↗</small></span>{{ end }}</a></div>{{ end }}
+  {{ end }}
+{{ end }}

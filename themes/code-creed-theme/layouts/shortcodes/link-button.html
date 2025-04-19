@@ -1,0 +1,18 @@
+{{/*
+  shortcode: link-button
+
+  Usage:
+  {{< link-button href="https://example.com" text="Click Here" title="Optional title attribute" >}}
+
+  Parameters:
+  - href: The URL for the link (required).
+  - text: The text to display on the button (required).
+  - title: Optional title attribute for the link. Defaults to the text.
+*/}}
+{{ $href := .Get "href" }}
+{{ $text := .Get "text" }}
+{{ $class := "button" }}
+{{ $title := .Get "title" | default $text }}
+
+{{ $linkAttributes := dict "Destination" $href "Text" $text "Class" $class "Title" $title }}
+{{ partial "_functions/render-link.html" $linkAttributes }}

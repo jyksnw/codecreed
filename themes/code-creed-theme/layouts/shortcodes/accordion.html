@@ -1,0 +1,15 @@
+{{/*
+  shortcode: accordion
+
+  Usage:
+  {{< accordion summary="Click to reveal!" >}}
+    <p>The hidden content goes here.</p>
+  {{< /accordion >}}
+
+  Parameters:
+  - summary: The text displayed as the clickable summary.
+*/}}
+<details>
+    <summary>{{ .Get "summary" }}</summary>
+    {{ .Inner }}
+</details>

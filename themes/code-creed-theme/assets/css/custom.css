@@ -1,154 +1,117 @@
 :root {
-  --bg: #f8f9fa;
-  --accent-bg: #e9ecef;
+  --bg: #e8f0ed;
+  --accent-bg: #b8c2bf;
   --text: #212529;
-  --text-light: #6c757d;
-  --border: #ced4da;
-  --accent: #007bff;
-  --accent-hover: #0056b3;
+  --text-light: #495057;
+  --border: #adb5bd;
+  --accent: #2c636a;
+  --accent-hover: #2a5055;
   --accent-text: #ffffff;
-  --code: #28a745;
-  --preformatted-bg: #f8f9fa;
+  --code: #1e7e34;
+  --preformatted: #212529;
+  --preformatted-bg: #d0d7d4;
   --marked-bg: #ffc107;
-  --disabled-text: #adb5bd;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #212529;
-    --accent-bg: #343a40;
-    --text: #f8f9fa;
-    --text-light: #adb5bd;
-    --border: #495057;
-    --accent: #17a2b8;
-    --accent-hover: #138496;
-    --accent-text: #ffffff;
-    --code: #98c379;
-    --preformatted-bg: #343a40;
-    --marked-bg: #e0a800;
-    --disabled-text: #6c757d;
-  }
-}
-
-.logo {
-  padding-bottom: 0.5em;
-}
-
-.logo h1 {
-  font-size: 2.2em;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  line-height: 1.1;
-}
-
-.logo .code {
-  color: var(--accent);
-  font-weight: 800;
-}
-
-.logo .ampersand {
-  font-family: "monospace", monospace;
-  font-size: 0.9em;
-  font-weight: bold;
-  color: var(--text-light);
-  vertical-align: middle;
-  margin: 0 0.2em;
-}
-
-.logo .creed {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.logo h1 a {
-  text-decoration: none;
-  border: none;
-  display: inline-block;
-}
-
-.logo h1 a:hover {
-  text-decoration: none;
-  border: none;
-}
-
-.logo h1 a:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.2rem var(--accent);
-  border-radius: 3px;
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo h1 {
-    color: var(--text);
-  }
-
-  .logo .code {
-    color: var(--accent);
-  }
-
-  .logo .ampersand {
-    color: var(--text-light);
-  }
-
-  .logo .creed {
-    color: var(--text);
-  }
-
-  .logo h1 a:focus {
-    box-shadow: 0 0 0 0.2rem var(--accent);
-  }
+  --disabled-text: #6c757d;
 }
 
 body {
-  -webkit-text-size-adjust: 100%; /* prevent Mobile Safari from adjusting font sizes */
+  -webkit-text-size-adjust: 100%;
 }
 
-nav a.current {
-  color: var(--accent) !important;
-  border-color: var(--accent) !important;
-}
-
-div.pagination {
+body > header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-ul.blog-posts {
-  padding-left: 0;
+.logo {
+  width: 16%;
+  height: auto;
+  min-width: 160px;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
-ul.blog-posts > li {
-  list-style-type: none;
-  display: flex;
+.logo-bracket {
+  font-family: sans-serif;
+  font-size: 30px;
+  fill: var(--accent);
+  dominant-baseline: central;
+  text-anchor: middle;
 }
 
-ul.blog-posts > li span {
-  flex: 0 0 130px;
+.logo-ampersand {
+  font-family: sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  fill: var(--accent);
+  dominant-baseline: central;
+  text-anchor: middle;
+}
+
+
+a span[aria-label="Opens in a new window"] small {
+  font-size: 0.4em;
+  vertical-align: middle;
+  margin-left: 0.1em;
   color: var(--text-light);
 }
 
-nav#TableOfContents > ul {
-  margin-block-start: 0;
+.post-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.icon {
-  vertical-align: sub;
-  padding-right: 0.25rem;
+.post-title {
+  font-size: 1.8em;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.post-description {
+  font-size: 0.9em;
+  color: var(--text-light);
+}
+
+.post-meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7em;
+  color: var(--text-light);
+}
+
+.post-meta-secondary {
+  order: 1;
+}
+
+.post-author {
+  font-weight: bold;
+}
+
+.post-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.post-tag-item a {
   display: inline-block;
-  width: 1em;
-  height: 1.3em;
-  margin-right: 0.2rem;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
+  padding: 0.3em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.75em;
 }
 
-div.highlight code,
-div.highlight pre,
-div.highlight pre span {
-  color: inherit;
+.post-tag-item a:hover {
+  background-color: var(--accent-bg);
+  border-color: var(--accent);
 }

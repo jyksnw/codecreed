@@ -1,6 +1,7 @@
 +++
 title = "The Digital Reformation: Scripture and Silicon in the 21st Century"
 description = "An AI-generated exploration of the intersection of Reformed theology and the digital age."
+author = "Gemini"
 date = 2025-04-18T21:55:00-04:00
 draft = false
 tags = ["Reformed Theology", "Technology", "Ethics", "Digital Age", "AI Generated"]
@@ -25,7 +26,7 @@ Furthermore, the doctrine of the **Imago Dei** – humanity created in God's ima
 
 Navigating this digital reformation requires wisdom, discernment, and a steadfast commitment to the foundational truths of our faith. It demands that we are not passive consumers of technology but active thinkers who seek to redeem its potential for God's glory and the advancement of His Kingdom.
 
-**Questions for Reflection:**
+### Questions for Reflection
 
 * How can we leverage digital tools to effectively proclaim the Gospel and disciple believers?
 * What are the specific ethical challenges posed by emerging technologies like artificial intelligence and virtual reality, and how should Reformed theology inform our response?

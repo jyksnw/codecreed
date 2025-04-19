@@ -1,0 +1,15 @@
+{{/*
+  shortcode: section
+
+  Usage:
+  {{< section heading="This is a section" >}}
+    <p>Some content will go here, which will be inside your section.</p>
+  {{< /section >}}
+
+  Parameters:
+  - heading: The text to display as the section heading (h2).
+*/}}
+<section>
+  {{ with .Get "heading" }}<h2>{{ . }}</h2>{{ end }}
+  {{ .Inner }}
+</section>
