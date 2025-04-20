@@ -1,5 +1,4 @@
 {{ define "main" }}
-<article>
   <header>
     <h1 class="post-title">{{ .Title }}</h1>
     {{ with .Description }}
@@ -13,11 +12,22 @@
       <p>
         Published on 
         <time datetime="{{ .Date.Format "2006-01-02" }}">
-          {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+          {{- .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") -}}
         </time>
-        {{ with .Params.author }}<span class="post-author">, written by {{ . }}</span>{{ end }}
+        {{ with .Params.author }}<span class="post-author">, written by {{- . -}}</span>{{ end }}
       </p>
     </div>
+  </header>
+
+  {{ if .Params.toc }}
+  <details>
+    <summary>Table of Contents</summary>
+    {{ .TableOfContents }}
+  </details>
+  {{ end }}
+  {{ .Content }}
+
+  <footer>
     {{ with .GetTerms "tags" }}
     <nav aria-label="Tags">
       <ul class="post-tags">
@@ -33,17 +43,6 @@
       </ul>
     </nav>
     {{ end }}
-  </header>
-
-  {{ if .Params.toc }}
-  <details>
-    <summary>Table of Contents</summary>
-    {{ .TableOfContents }}
-  </details>
-  {{ end }}
-  {{ .Content }}
-
-  <footer>
     {{ if .Params.ShowPostNavLinks }}
     <nav aria-label="Post navigation">
       {{ with .PrevInSection }}
@@ -64,5 +63,4 @@
     {{ end }}
     <p><a href="#top">[Top]</a></p>
   </footer>
-</article>
 {{ end }}

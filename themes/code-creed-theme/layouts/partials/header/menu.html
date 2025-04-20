@@ -1,32 +1,28 @@
-{{- $page := .page }}
-{{- $menuID := .menuID }}
-{{- $isMain := eq $menuID "main" | default false }}
-
+{{- $menuID := default "main" }}
 {{- with index site.Menus $menuID }}
-    <ul>
-        {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
-    </ul>
-{{- end }}
+<nav id="main-navigation" class="menu" role="navigation" aria-label="Main Navigation">
+  <div id="menu-toggle">
+    <input type="checkbox" id="menu-checkbox" />
 
-{{- define "partials/inline/menu/walk.html" }}
-  {{- $page := .page }}
-  {{- range .menuEntries }}
-    {{- $link := .URL }}
-    {{- $linkTitle := .Title }}
-    {{- $linkText := .Name }}
-    {{- with .Identifier }}
-      {{- with T . }}
-        {{- $linkText = . }}
+    <span></span>
+    <span></span>
+    <span></span>
+
+    <ul id="menu">
+      {{- range . }}
+        {{- $link := .URL }}
+        {{- $linkTitle := .Title }}
+        {{- $linkText := .Name }}
+        {{- with .Identifier }}
+          {{- with T . }}
+            {{- $linkText = . }}
+          {{- end }}
+        {{- end }}
+        <li>
+          {{ partial "_functions/render-link.html" (dict "Destination" $link "Text" $linkText "Title" $linkTitle) }}
+        </li>
       {{- end }}
-    {{- end }}
-    {{- $hover := .Pre }}
-    <li>
-      {{ partial "_functions/render-link.html" (dict "Destination" $link "Text" $linkText "Title" $linkTitle) }}
-      {{- with .Children }}
-        <ul>
-          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
-        </ul>
-      {{- end }}
-    </li>
-  {{- end }}
+    </ul>
+</div>
+</nav>
 {{- end }}
