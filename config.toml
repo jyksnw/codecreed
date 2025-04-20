@@ -11,24 +11,29 @@ theme = 'code-creed-theme'
 
 [menu]
   [[menu.main]]
+    name = "Home"
+    pre = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
     name = "About"
     pre = "About Code & Creed."
     url = "/about/"
-    weight = 1
+    weight = 2
   [[menu.main]]
     name = "Blog"
     pre = "Read our theological and philosophical insights."
     url = "/blog/"
-    weight = 2
+    weight = 3
   [[menu.main]]
     name = "Projects"
     pre = "Discover our endeavors for God's glory."
     url = "/projects/"
-    weight = 3
+    weight = 4
   [[menu.main]]
     name = "Books"
     url = "/books/"
-    weight = 4
+    weight = 5
 
 [build]
   minify = true

@@ -1,10 +1,9 @@
 +++
 title = "Code & Creed: Redeeming Technology, Rooted in Truth"
+images = ["logo.webp","logo.svg"]
 +++
 
 ## Redeeming Technology, Rooted in Reformed Thought
-
-![Code & Creed Logo](logo.svg "Code & Creed")
 
 We explore the intersection of the digital world and the enduring truths of the Christian Reformed tradition. At Code & Creed, we seek to thoughtfully integrate technology with a biblical worldview, examining the philosophical implications of our digital age through the lens of Reformed theology.
 

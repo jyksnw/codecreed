@@ -26,13 +26,15 @@ body > header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 1.55rem 1rem 0.2rem 1rem;
+  padding: 1.55rem 1rem 0.2rem 4rem;
 }
 
 .logo {
+  display: block;
   width: 2%;
   height: auto;
   min-width: 80px;
+  margin-right: 25px;
 }
 
 .logo-link:focus {
