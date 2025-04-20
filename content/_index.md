@@ -1,6 +1,6 @@
 +++
 title = "Code & Creed: Redeeming Technology, Rooted in Truth"
-images = ["logo.svg"]
+images = ["logo.webp"]
 +++
 
 ## Redeeming Technology, Rooted in Reformed Thought
