@@ -8,7 +8,8 @@ theme = 'code-creed-theme'
     description = 'A website project dedicated to bridging the digital and tangible worlds through thoughtful content and design.'
     author = 'Jason Snow'
     title = 'Code & Creed'
-    images = ["logo.webp","logo.svg"]
+    images = [
+      "logo.svg"]
 
 [menu]
   [[menu.main]]
